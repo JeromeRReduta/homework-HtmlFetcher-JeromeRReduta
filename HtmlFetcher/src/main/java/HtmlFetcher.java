@@ -15,6 +15,7 @@ public class HtmlFetcher {
 	
 	private static final String CONTENT_TYPE = "Content-Type";
 	private static final String TEXT_HTML = "text/html";
+	private static final String LOCATION = "Location";
 
 	/**
 	 * Returns {@code true} if and only if there is a "Content-Type" header and
@@ -57,8 +58,11 @@ public class HtmlFetcher {
 	 * @return {@code true} if the headers indicate the content type is HTML
 	 */
 	public static boolean isRedirect(Map<String, List<String>> headers) {
-		// TODO Fill in this method.
-		throw new UnsupportedOperationException("Not yet implemented.");
+		
+		int statusCode = getStatusCode(headers);
+		
+		return statusCode >= 300 && statusCode <= 399 && headers.containsKey(LOCATION) && headers.get(LOCATION).size() >= 1; 
+		
 	}
 
 	/**

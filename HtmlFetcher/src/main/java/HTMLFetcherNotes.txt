@@ -14,7 +14,7 @@ HTMLFetcher Notes
 		else
 			return false;
 
-+getStatusCode(Map<String, List<String>> headers)
++getStatusCode(Map<String, List<String>> headers): int
 
 	Sample status: [HTTP/1.1 200 OK]
 
