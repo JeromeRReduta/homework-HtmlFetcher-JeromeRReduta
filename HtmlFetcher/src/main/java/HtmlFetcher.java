@@ -48,7 +48,7 @@ public class HtmlFetcher {
 	 * @return the HTTP status code or -1 if unable to parse for any reasons
 	 */
 	public static int getStatusCode(Map<String, List<String>> headers) {
-		String statusCode = headers.get(null).get(0).split("\s")[1];
+		String statusCode = headers.get(null).get(0).split("\\s+")[1];
 		return Integer.parseInt(statusCode);
 		
 	}
