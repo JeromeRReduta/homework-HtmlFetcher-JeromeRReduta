@@ -49,7 +49,7 @@ public class HtmlFetcher {
 	 */
 	public static int getStatusCode(Map<String, List<String>> headers) {
 		
-		return Integer.parseInt(headers.get(null).get(0).split("\s+")[1]);
+		return Integer.parseInt(headers.get(null).get(0).split("\s")[1]);
 		
 	}
 
