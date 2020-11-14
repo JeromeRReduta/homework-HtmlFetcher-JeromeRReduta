@@ -49,12 +49,6 @@ public class HtmlFetcher {
 	 */
 	public static int getStatusCode(Map<String, List<String>> headers) {
 		
-		/**
-		 * 1. get status code (headers.get(null).get(0))
-		 * 2. Split by whitespace (split("\s+"))
-		 * 3. Get the actual number (index = 1)
-		 * 4. Convert the number from String to int (Integer.parseInt(...))
-		 */
 		return Integer.parseInt(headers.get(null).get(0).split("\s+")[1]);
 		
 	}
