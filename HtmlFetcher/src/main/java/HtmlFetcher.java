@@ -12,6 +12,9 @@ import java.util.Map;
  * @see HttpsFetcher
  */
 public class HtmlFetcher {
+	
+	private static final String CONTENT_TYPE = "Content-Type";
+	private static final String TEXT_HTML = "text/html";
 
 	/**
 	 * Returns {@code true} if and only if there is a "Content-Type" header and
@@ -22,8 +25,9 @@ public class HtmlFetcher {
 	 * @return {@code true} if the headers indicate the content type is HTML
 	 */
 	public static boolean isHtml(Map<String, List<String>> headers) {
-		// TODO Fill in this method.
-		throw new UnsupportedOperationException("Not yet implemented.");
+	
+		return headers.containsKey(CONTENT_TYPE) && headers.get(CONTENT_TYPE).get(0).startsWith(TEXT_HTML);
+		
 	}
 
 	/**
