@@ -1,0 +1,23 @@
+HTMLFetcher Notes
+
++isHtml(Map<String, List<String>> headers): boolean
+
+	return true if:
+		1. "Content-Type" header exists
+		2. 1st value of header starts w/ "text/html"
+
+	Pseudocode:
+		
+		if (headers.containsKey("Content-Type") && headers.get("Content-Type").get(0).startsWith("text/html")):
+			return true;
+
+		else
+			return false;
+
++getStatusCode(Map<String, List<String>> headers)
+
+	Sample status: [HTTP/1.1 200 OK]
+
+	Goal:
+		Strip "HTTP/1.1", "OK", any whitespaces (only leaves #)
+		Parse number to integer
