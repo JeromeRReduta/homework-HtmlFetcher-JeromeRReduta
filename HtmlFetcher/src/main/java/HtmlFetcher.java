@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -13,9 +14,17 @@ import java.util.Map;
  */
 public class HtmlFetcher {
 	
+	/** For convenience */
 	private static final String CONTENT_TYPE = "Content-Type";
+	
+	/** For convenience */
 	private static final String TEXT_HTML = "text/html";
+	
+	/** For convenience */
 	private static final String LOCATION = "Location";
+	
+	/** For convenience */
+	private static final String CONTENT = "Content";
 
 	/**
 	 * Returns {@code true} if and only if there is a "Content-Type" header and
@@ -88,8 +97,24 @@ public class HtmlFetcher {
 	 * @see #isRedirect(Map)
 	 */
 	public static String fetch(URL url, int redirects) {
-		// TODO Fill in this method.
-		throw new UnsupportedOperationException("Not yet implemented.");
+	
+		try {
+			Map<String, List<String>> headers = HttpsFetcher.fetchURL(url);
+			
+			if (getStatusCode(headers) == 200 && isHtml(headers)) {
+				return String.join("\n",  headers.get(CONTENT));
+			}
+			else if (isRedirect(headers) && redirects > 0) {
+				return fetch(headers.get(LOCATION).get(0), redirects - 1);
+			}
+			
+			return null;
+		}
+		catch (IOException e) {
+			System.out.println("fetch(URL, int) - IOException:\t" + e);
+			return null;
+		}
+		
 	}
 
 	/**

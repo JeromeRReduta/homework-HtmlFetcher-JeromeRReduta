@@ -142,4 +142,17 @@ public class HttpsFetcher {
 	public static List<String> getContent(BufferedReader response) throws IOException {
 		return response.lines().collect(Collectors.toList());
 	}
+	
+	/*
+	public static void main(String[] args) throws Exception {
+		String url = "http://www.cs.usfca.edu/~cs212/";
+		
+		var results = fetchURL(url);
+		System.out.println(url);
+		for (var entry : results.entrySet()) {
+			System.out.println(entry.getKey() + ": " + entry.getValue());
+		}
+		System.out.println();
+	}
+	*/
 }

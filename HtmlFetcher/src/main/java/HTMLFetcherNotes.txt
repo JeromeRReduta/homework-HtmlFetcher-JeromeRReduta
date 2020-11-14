@@ -21,3 +21,36 @@ HTMLFetcher Notes
 	Goal:
 		Strip "HTTP/1.1", "OK", any whitespaces (only leaves #)
 		Parse number to integer
+
++isRedirect(Map<String, List<String>> headers): boolean
+	
+	Goal:
+		Return whether ALL of the following are true:
+			getStatusCode(headers) is between 300 and 399 (inclusive)
+			"Location" header exists
+			headers.get("Location") has at least one value
+
+	Pseudocode:
+
+		return getStatusCode(headers) >= 300 && getStatusCode(headers) <= 399 && headers.containsKey("Location") && headers.get("Location").size() >= 1
+
+			
+
+
++ fetch(URL url, int redirects): String
+
+	Sample URL that is a redirect:
+	
+		null: [HTTP/1.1 302 Found]
+		Location: [URL for redirect]
+
+	Goal:
+		"Fetch resource at URL w/ HTTP/1.1 and sockets" 
+		If getStatusCode(headers) == 200 && isHtml(headers):
+			return HTML as string
+
+		Else if isRedirect(headers) && redirects > 0:
+			fetch new url (headers.get(LOCATION)), w/ redirects = 1
+		
+		Else:
+			return null
